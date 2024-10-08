@@ -1,11 +1,65 @@
 package org.example;
 
+import org.example.entity.Customer;
+
+import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         System.out.println("Hello world!");
+//        readFile();
+//        writeFile();
+        hackerRankDataType();
+    }
+
+    public static void hackerRankDataType() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("start");
+        int t=sc.nextInt();
+
+        for(int i=0;i<t;i++) {
+            try
+            {
+                long x=sc.nextLong();
+                System.out.println(x+" can be fitted in:");
+                if(x>=-128 && x<=127)System.out.println("* byte");//2^8 = 256
+                if (x>= -32768 && x<=32767) System.out.println("* short");//2^16 = 64000
+                if (x>= -2147483648 && x<= 2147483647) System.out.println("* int");//2^32 = 4byte
+                if (x>= -9223372036854775808L && x<= 9223372036854775807L) System.out.println("* long");//2^64 = 8byte
+            }
+            catch(Exception e)
+            {
+                System.out.println(sc.next()+" can't be fitted anywhere.");
+            }
+
+        }
+    }
+
+    static void readFile() throws IOException, ClassNotFoundException {
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File("cus3.dat")));
+        System.out.println("Customer after deserialization:");
+        Customer customer = (Customer) ois.readObject();
+        System.out.println(customer);
+        ois.close();
+    }
+
+    static void writeFile() throws IOException{
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(new File("cus3.dat")));
+        Customer customer = new Customer();
+        customer.setId(1);
+        customer.setName("kai");
+        customer.setAddress("ha noi");
+
+        System.out.println("Customer before serialization:");
+        System.out.println(customer);
+        objectOutputStream.writeObject(customer);
+        objectOutputStream.close();
+    }
+
+
+    static void testMap() {
         // khoi tao map
 //        TreeMap<String, String> treeMap = new TreeMap<String, String>();
 //        Map<String, String> map = new HashMap<String, String>();
@@ -21,16 +75,20 @@ public class Main {
 //        while (itr.hasNext()) {
 //            System.out.println(map.get(itr.next()));
 //        }
-        List<Transaction> transactions = Arrays.asList(new Transaction("121", "3000","ABC"),//->3100
-                                                        new Transaction("123", "100","sdfsf"),
-                                                        new Transaction("121", "100","ABC"),
-                                                        new Transaction("122", "1000","2222222"),
-                                                        new Transaction("124", "5000","DEF:ghi"),//->5100
-                                                        new Transaction("125", "10000","3333333"),
-                                                        new Transaction("124", "100","DEF: Custom"));
-        mergeTransaction(transactions);
+//        List<Transaction> transactions = Arrays.asList(new Transaction("121", "3000","ABC"),//->3100
+//                                                        new Transaction("123", "100","sdfsf"),
+//                                                        new Transaction("121", "100","ABC"),
+//                                                        new Transaction("122", "1000","2222222"),
+//                                                        new Transaction("124", "5000","DEF:ghi"),//->5100
+//                                                        new Transaction("125", "10000","3333333"),
+//                                                        new Transaction("124", "100","DEF: Custom"));
+//        mergeTransaction(transactions);
 //        tess();
     }
+
+
+
+
 
     static  void tess(){
         HashMap hm = new HashMap();
